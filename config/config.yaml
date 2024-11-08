@@ -1,0 +1,6 @@
+email:
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  sender_email: "duttasoham94@gmail.com"
+  sender_password: "zsjj wabj gyri yurq"
+  alert_receiver_email: "samdutta2018spl@gmail.com"

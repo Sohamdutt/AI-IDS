@@ -1,0 +1,37 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>IDS Dashboard</title>
+</head>
+<body>
+    <h1>Intrusion Detection System Dashboard</h1>
+
+    <form id="predict-form">
+        <label for="data-input">Enter Data for Prediction:</label>
+        <input type="text" id="data-input" placeholder="Comma-separated feature values" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("predict-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = document.getElementById("data-input").value.split(",").map(Number);
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data })
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerText = "Prediction: " + result.result;
+        });
+    </script>
+</body>
+</html>
